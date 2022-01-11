@@ -14,8 +14,8 @@ If you want to learn more about using the technical tools available with Unit4 E
 
 ## Sections
 
-- [Extension Kit](Extension%20Kit/README.md)
-- [OData](OData/README.md)
+- [Extension Kit](Extension%20Kit/)
+- [OData](OData/)
 
 ## Contributions
 We want this repository to provide useful tools to the whole Unit4 community, including customers, consultants and partners.
