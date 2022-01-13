@@ -1,0 +1,272 @@
+{
+  "FlowId": "4074c85c-b861-422e-a9cb-c797220d0e8f",
+  "FlowType": "Customer",
+  "Version": 42,
+  "Description": "[T4C] Absence to Calendar",
+  "UserId": "382e2e64-c29a-4af0-a758-960a512ec81f\\BxxuFaJL7FDQs6qpdjdP9sgswQqjVzXMGzQMP8wPdvM",
+  "Trigger": {
+    "Type": "mh-events",
+    "Version": 1,
+    "Config": {
+      "Tenant": null,
+      "SourceSystem": "u4bw",
+      "MessageType": "DocumentMessage",
+      "Name": "workflowtransactions",
+      "Version": "1.0"
+    }
+  },
+  "Actions": [
+    {
+      "Type": "http-request",
+      "Version": 1,
+      "Filter": [
+        {
+          "BodyPath": "{{ step0.Properties.elementType }}",
+          "Operation": 2,
+          "Value": "ABSA"
+        },
+        {
+          "BodyPath": "{{ step0.Properties.event }}",
+          "Operation": 2,
+          "Value": "WfFinished"
+        },
+        {
+          "BodyPath": "{{ step0.Body }}",
+          "Operation": 1,
+          "Value": ""
+        }
+      ],
+      "Condition": [],
+      "Input": {
+        "Name": "88dc9673-9eba-4832-9648-3c303e425122",
+        "Properties": [
+          {
+            "Name": "AuthenticationType",
+            "Value": {
+              "Text": "Basic"
+            }
+          },
+          {
+            "Name": "Username",
+            "Value": {
+              "Text": "{{parameters.ERPWebUserName}}"
+            }
+          },
+          {
+            "Name": "Password",
+            "Value": {
+              "Text": "@@actionParameter000"
+            }
+          },
+          {
+            "Name": "Method",
+            "Value": {
+              "Text": "GET"
+            }
+          },
+          {
+            "Name": "Url",
+            "Value": {
+              "Text": "{{parameters.ERPWebAPI}}v1/objects/attribute-values?companyId={{step0.Properties.client}}&select=attributeId%2C%20attributeValue%2C%20description&filter=attributeId%20eq%20'CF'%20and%20attributeValue%20eq%20'{{step0.Body.absenceCode}}'%20and%20status%20eq%20'N'"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Type": "http-request",
+      "Version": 1,
+      "Filter": [],
+      "Condition": [],
+      "Input": {
+        "Name": "5375239f-7ee7-4f15-8d4b-1fa76cce5901",
+        "Properties": [
+          {
+            "Name": "AuthenticationType",
+            "Value": {
+              "Text": "Basic"
+            }
+          },
+          {
+            "Name": "Username",
+            "Value": {
+              "Text": "{{parameters.ERPWebUserName}}"
+            }
+          },
+          {
+            "Name": "Password",
+            "Value": {
+              "Text": "@@actionParameter001"
+            }
+          },
+          {
+            "Name": "Method",
+            "Value": {
+              "Text": "GET"
+            }
+          },
+          {
+            "Name": "Url",
+            "Value": {
+              "Text": "{{parameters.ERPWebAPI}}v1/objects/attribute-values?companyId={{step0.Properties.client}}&select=attributeId%2C%20attributeValue%2C%20description&filter=attributeId%20eq%20'C06'%20and%20attributeValue%20eq%20'{{step0.Body.absenceReason}}'%20and%20status%20eq%20'N'"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Type": "http-request",
+      "Version": 1,
+      "Filter": [],
+      "Condition": [],
+      "Input": {
+        "Name": "6c79ac2a-5e46-42b1-b8b7-27d697b7ca8c",
+        "Properties": [
+          {
+            "Name": "AuthenticationType",
+            "Value": {
+              "Text": "Basic"
+            }
+          },
+          {
+            "Name": "Username",
+            "Value": {
+              "Text": "{{parameters.ERPWebUserName}}"
+            }
+          },
+          {
+            "Name": "Password",
+            "Value": {
+              "Text": "@@actionParameter002"
+            }
+          },
+          {
+            "Name": "Method",
+            "Value": {
+              "Text": "GET"
+            }
+          },
+          {
+            "Name": "Url",
+            "Value": {
+              "Text": "{{parameters.ERPWebAPI}}v1/objects/employees?companyId={{step0.Properties.client}}&select=personId%2C%20contactPoints(contactPointType%2C%20additionalContactInfo(eMail))&filter=personId%20eq%20'{{step0.Body.personId}}'"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Type": "execute-templating-script",
+      "Version": 1,
+      "Filter": [],
+      "Condition": [],
+      "Input": {
+        "Name": "e268f17a-80c4-41fa-ba59-143e1fab70cf",
+        "Properties": [
+          {
+            "Name": "Script",
+            "Value": {
+              "Text": "{% assign TimeFrom = '' | append: step0.Body.timeFrom %}\n{% assign TimeTo = '' | append: step0.Body.timeTo %}\n\n{% if TimeFrom.size < 4 %}\n\t{% assign startHours1 = '0' %}\n\t{% assign startHours2 = '' | append: TimeFrom | slice: 0 %}\n  \t{% assign startMins1 = '' | append: TimeFrom | slice: 1 %}\n\t{% assign startMins2 = '' | append: TimeFrom | slice: 2 %}\n{% else %}\n\t{% assign startHours1 = '' | append: TimeFrom | slice: 0 %}\n\t{% assign startHours2 = '' | append: TimeFrom | slice: 1 %}\n  \t{% assign startMins1 = '' | append: TimeFrom | slice: 2 %}\n\t{% assign startMins2 = '' | append: TimeFrom | slice: 3 %}\t\n{% endif %}\n\n{% if TimeTo.size < 4 %}\n\t{% assign endHours1 = '0' %}\n\t{% assign endHours2 = '' | append: TimeTo | slice: 0 %}\n  \t{% assign endMins1 = '' | append: TimeTo | slice: 1 %}\n\t{% assign endMins2 = '' | append: TimeTo | slice: 2 %}\n{% else %}\n\t{% assign endHours1 = '' | append: TimeTo | slice: 0 %}\n\t{% assign endHours2 = '' | append: TimeTo | slice: 1 %}\n  \t{% assign endMins1 = '' | append: TimeTo | slice: 2 %}\n\t{% assign endMins2 = '' | append: TimeTo | slice: 3 %}\t\t\n{% endif %}\n\n{% assign startHours = startHours1 | append: startHours2 %}\t\n{% assign endHours = endHours1 | append: endHours2 %}\n{% assign startMins = startMins1 | append: startMins2 %}\n{% assign endMins = endMins1 | append: endMins2 %}\n\n{% assign DateFrom = date.parse step0.Body.dateFrom %}\n{% assign DateFrom = DateFrom.year | append: '/' | append: DateFrom.month | append: '/' | append: DateFrom.day | append: ' ' | append: startHours | append: ':' | append: startMins %}\n{% assign StartTime = date.parse DateFrom | date.to_string '%Y-%m-%dT%T' %}\n\n{% assign DateTo = date.parse step0.Body.dateTo %}\n{% assign DateTo = DateTo.year | append: '/' | append: DateTo.month | append: '/' | append: DateTo.day | append: ' ' | append: endHours | append: ':' | append: endMins %}\n{% assign EndTime = date.parse DateTo | date.to_string '%Y-%m-%dT%T' %}"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Type": "http-request",
+      "Version": 1,
+      "Filter": [],
+      "Condition": [],
+      "Input": {
+        "Name": "ecb376e3-3dad-4b61-87ed-b1f2bb0455c2",
+        "Properties": [
+          {
+            "Name": "AuthenticationType",
+            "Value": {
+              "Text": "Bearer"
+            }
+          },
+          {
+            "Name": "IdsUrl",
+            "Value": {
+              "Text": "https://login.microsoftonline.com/{{parameters.O365Tenant}}/oauth2/v2.0/token"
+            }
+          },
+          {
+            "Name": "Client",
+            "Value": {
+              "Text": "{{parameters.O365ClientId}}"
+            }
+          },
+          {
+            "Name": "ClientSecret",
+            "Value": {
+              "Text": "@@actionParameter003"
+            }
+          },
+          {
+            "Name": "RequestedScope",
+            "Value": {
+              "Text": "https://graph.microsoft.com/.default"
+            }
+          },
+          {
+            "Name": "Method",
+            "Value": {
+              "Text": "POST"
+            }
+          },
+          {
+            "Name": "Url",
+            "Value": {
+              "Text": "https://graph.microsoft.com/v1.0/users/{{step3.Response[0].contactPoints[0].additionalContactInfo.eMail}}/calendar/events"
+            }
+          },
+          {
+            "Name": "ContentType",
+            "Value": {
+              "Text": "application/json"
+            }
+          },
+          {
+            "Name": "Content",
+            "Value": {
+              "Text": "{\"subject\":\"{{step1.Response[0].description}} - {{step2.Response[0].description}}\",\"start\":{\"dateTime\":\"{{StartTime}}\",\"timeZone\":\"GMT\"},\"end\":{\"dateTime\":\"{{EndTime}}\",\"timeZone\":\"GMT\"}}"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Type": "stop",
+      "Version": 1,
+      "Filter": [],
+      "Condition": [],
+      "Input": {
+        "Name": "f020c1cb-6a18-4d0e-9f51-101c49e3b24e",
+        "Properties": [
+          {
+            "Name": "StopWith",
+            "Value": {
+              "Text": "Success"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "IsParked": false,
+  "Status": "Active",
+  "Configuration": {
+    "IsSensitive": false
+  },
+  "LastChangedBy": "382e2e64-c29a-4af0-a758-960a512ec81f\\BxxuFaJL7FDQs6qpdjdP9sgswQqjVzXMGzQMP8wPdvM",
+  "LastChangedAt": "2022-01-13T16:31:33Z",
+  "LastAvailableHistoryAt": "0001-01-01T00:00:00Z",
+  "FeatureFlags": [
+    {
+      "Name": "templatingV2",
+      "IsEnabled": true
+    }
+  ]
+}
