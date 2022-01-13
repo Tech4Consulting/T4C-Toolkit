@@ -28,7 +28,7 @@ Data:
 
 ---
 
-If we want to include data from 'sub' objects we add the name of the object with the field.  Here we want to include the 'last update date' along with the attribute Id and attribute value so we use.
+If we want to include data from 'sub' objects we add the name of the object with the field(s) we're interested in as a comma seperated list.  Here we want to include the 'last update date' along with the attribute Id and attribute value so we use.
 
 attributeId, attributeValue, lastUpdated(updatedAt)
 
