@@ -20,6 +20,13 @@ The exported flow can be found in the following location, you will need both JSO
 
 - [Flow Exports](FlowExport/)
 
+## Concepts Covered
+
+- Message Hub Event
+- Calling Unit4 ERP Public APIs
+- Liquid Scripting
+- Calling external APIs using 'Bearer Token' authentication
+
 ## Azure AD configuration
 
 To enable this functionality a new app registration must be made in the Azure AD associated with your Office 365 accounts, this will allow extension kit to access the Microsoft Graph APIs without the need for a specific user to login.
