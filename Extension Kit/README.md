@@ -11,3 +11,9 @@ This is a complete flow that pushes approved absences from Unit4 ERP to a users 
 ![Calendar](AbsenceToCalendar/Assets/CalendarAbsence.png)
 
 ---
+
+## Exchange Rate Import (ERPx)
+
+View [here](ExchangeRateImport/)
+
+A complete flow to import exchange rates from an external source ([https://exchangeratesapi.io/](https://exchangeratesapi.io/)) into ERPx.

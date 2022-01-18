@@ -14,6 +14,10 @@ Calendar entries are created with 'Absence Code description' and 'Absence Reason
 
 ![Calendar](Assets/CalendarAbsence.png)
 
+## Created By
+
+Peter Davis ([Tech4ConsultingDev](https://github.com/Tech4ConsultingDev)/[PancheSoftwareDev](https://github.com/PanacheSoftwareDev)) - Tech4 Consulting - [peter.davis@tech4consulting.com](mailto:peter.davis@tech4consulting.com)
+
 ## Download Flows
 
 The exported flow can be found in the following location, you will need both JSON files and these can be imported into your Extension Kit instance via the 'Import' button within the 'Flows' area.
@@ -26,6 +30,10 @@ The exported flow can be found in the following location, you will need both JSO
 - Calling Unit4 ERP Public APIs
 - Liquid Scripting
 - Calling external APIs using 'Bearer Token' authentication
+
+This flow runs on the 'workflowtransactions' document message hub event which allows it to pick up absences (element type: ABSA) that have finished workflow.  
+
+Along with making calls back to the ERP public APIS (to get attribute value descriptions) it also contains some Liquid Scripting that looks at the 'timeFrom' and 'timeTo' integer values associated with the absence and adds those to the 'dateFrom' and 'dateTo' so that the calendar entry is created with the correct time span.  I think that this scripting could be improved and I'll refine it if I find better ways to process the values. 
 
 ## Azure AD configuration
 

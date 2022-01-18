@@ -17,10 +17,14 @@ If you want to learn more about using the technical tools available with Unit4 E
 - [Extension Kit](Extension%20Kit/)
 - [OData](OData/)
 
+## Contributors
+
+- Peter Davis ([Tech4ConsultingDev](https://github.com/Tech4ConsultingDev)/[PancheSoftwareDev](https://github.com/PanacheSoftwareDev)) - Tech4 Consulting - [peter.davis@tech4consulting.com](mailto:peter.davis@tech4consulting.com)
+
 ## Contributions
 We want this repository to provide useful tools to the whole Unit4 community, including customers, consultants and partners.
 
-If you'd like to contribute your own examples to the repository let us know at [contact@tech4consulting.com](mailto:contact@tech4consulting.com) or alternatively fork this repository and issue a pull request [(how to)](https://www.dataschool.io/how-to-contribute-on-github/).  
+If you'd like to contribute your own examples to the repository let us know at [contact@tech4consulting.com](mailto:contact@tech4consulting.com) or alternatively fork this repository and issue a pull request ([how to](https://www.dataschool.io/how-to-contribute-on-github/)).  
 
 If you have questions, suggestions, or need help with anything in this repository use the [Issues](https://github.com/Tech4Consulting/T4C-Toolkit/issues) page.
 
