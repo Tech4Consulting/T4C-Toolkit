@@ -28,6 +28,10 @@ If you'd like to contribute your own examples to the repository let us know at [
 
 If you have questions, suggestions, or need help with anything in this repository use the [Issues](https://github.com/Tech4Consulting/T4C-Toolkit/issues) page.
 
+## New ideas
+
+If you have any ideas for examples, maybe you want to know how to achieve a specific task, like get specific data from an API, please add a comment via the [Issues](https://github.com/Tech4Consulting/T4C-Toolkit/issues) page and if it's feasible us, or maybe another contributor, can provide an example.
+
 ## Licence
 
 Everything here is provided using an [MIT Licence](LICENSE) so is free to use by anyone.
