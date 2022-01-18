@@ -33,7 +33,7 @@ This flow contains a lot of automation to ensure that it works without the need 
 
 The Exchange Rates API provided by ERPx only allows you to POST exchange rates where one already exists in ERPx, so with the following Currency Type the API will only allow you to import exchange rates for GBP and USD, if you want to add more you will need to create them through this Exchange Rate Entry screen first before the Extension Kit Flow will load them.
 
-![Azure AD](Assets/ExchangeRateEntry.png)
+![ExchangeRateEntry](Assets/ExchangeRateEntry.png)
 
 This Extension Kit flow performs the following actions.
 
@@ -48,4 +48,19 @@ This Extension Kit flow performs the following actions.
 To enable the automation above a substantial amount of Liquid scripting is used to both parse data coming in from External APIs and also to assemble data ready to be posted back into ERPx.
 
 Get in contact if you think it is worth me breaking down some of this script to explain it more.
+
+## Parameters
+
+The following Parameters are required for this flow:
+
+- ERPClientId (the client ID for your ERPx instance, needed for token authorisation)
+- ERPClientSecret (the client secret for your ERPx instance, needed for token authorisation)
+- ERPTokenEndpoint (the IDS token endpoint for ERPx)
+- ERPScope (the ID of your ERPx source system)
+- ERPBaseURL (the base url for the ERPx public APIs)
+- ERPCompanyId (the company ID you want to use for importing exchange rates)
+- ExchRateAPIKey (the API key for your account at an external exchange rate provider)
+- ExchRateAPIURL (the URL of the exchange rate API you're using)
+
+![ExchangeRateEntry](Assets/Parameters.png)
 
