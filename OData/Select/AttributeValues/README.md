@@ -40,6 +40,10 @@ Data:
 
 ![ComplexSelectData](Assets/ComplexSelectData.png)
 
+If you want to include all 'sub' objects we can use a '*', i.e.
+
+attributeId, attributeValue, lastUpdated(*)
+
 
 
 

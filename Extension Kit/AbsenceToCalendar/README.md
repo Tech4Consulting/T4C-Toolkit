@@ -1,4 +1,4 @@
-# Absences to Office 365 Calendar
+# ERP Absence to Office 365 Calendar (ERP7 & ERPx)
 
 This flow is designed to push approved absences through to a users Office 365 Calendar.  
 

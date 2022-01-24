@@ -1,0 +1,158 @@
+{
+  "FlowId": "30ca65ff-677f-4a54-8e19-69701205704d",
+  "FlowType": "Customer",
+  "Version": 12,
+  "Description": "[T4C] Supplier MS Team Channel",
+  "UserId": "382e2e64-c29a-4af0-a758-960a512ec81f\\BxxuFaJL7FDQs6qpdjdP9sgswQqjVzXMGzQMP8wPdvM",
+  "Trigger": {
+    "Type": "mh-events",
+    "Version": 1,
+    "Config": {
+      "Tenant": null,
+      "SourceSystem": "u4bw",
+      "MessageType": "DocumentMessage",
+      "Name": "supplier",
+      "Version": "1.0"
+    }
+  },
+  "Actions": [
+    {
+      "Type": "http-request",
+      "Version": 1,
+      "Filter": [
+        {
+          "BodyPath": "{{ step0.Properties.OperationType }}",
+          "Operation": 2,
+          "Value": "Added"
+        }
+      ],
+      "Condition": [],
+      "Input": {
+        "Name": "0c09d062-1208-4d18-87f2-3be11c81ebb5",
+        "Properties": [
+          {
+            "Name": "AuthenticationType",
+            "Value": {
+              "Text": "Bearer"
+            }
+          },
+          {
+            "Name": "IdsUrl",
+            "Value": {
+              "Text": "https://login.microsoftonline.com/{{parameters.O365Tenant}}/oauth2/v2.0/token"
+            }
+          },
+          {
+            "Name": "Client",
+            "Value": {
+              "Text": "{{parameters.O365ClientId}}"
+            }
+          },
+          {
+            "Name": "ClientSecret",
+            "Value": {
+              "Text": "@@actionParameter000"
+            }
+          },
+          {
+            "Name": "RequestedScope",
+            "Value": {
+              "Text": "https://graph.microsoft.com/.default"
+            }
+          },
+          {
+            "Name": "Method",
+            "Value": {
+              "Text": "GET"
+            }
+          },
+          {
+            "Name": "Url",
+            "Value": {
+              "Text": "https://graph.microsoft.com/v1.0/groups?$filter=displayName eq 'Accounts Payable'"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Type": "http-request",
+      "Version": 1,
+      "Filter": [
+        {
+          "BodyPath": "{{ step1.StatusCode }}",
+          "Operation": 2,
+          "Value": "200"
+        }
+      ],
+      "Condition": [],
+      "Input": {
+        "Name": "2e6b23a1-b09d-4107-a4dd-7b4cf808d51f",
+        "Properties": [
+          {
+            "Name": "AuthenticationType",
+            "Value": {
+              "Text": "Bearer"
+            }
+          },
+          {
+            "Name": "IdsUrl",
+            "Value": {
+              "Text": "https://login.microsoftonline.com/{{parameters.O365Tenant}}/oauth2/v2.0/token"
+            }
+          },
+          {
+            "Name": "Client",
+            "Value": {
+              "Text": "{{parameters.O365ClientId}}"
+            }
+          },
+          {
+            "Name": "ClientSecret",
+            "Value": {
+              "Text": "@@actionParameter001"
+            }
+          },
+          {
+            "Name": "RequestedScope",
+            "Value": {
+              "Text": "https://graph.microsoft.com/.default"
+            }
+          },
+          {
+            "Name": "Method",
+            "Value": {
+              "Text": "POST"
+            }
+          },
+          {
+            "Name": "Url",
+            "Value": {
+              "Text": "https://graph.microsoft.com/v1.0/teams/{{step1.Response.value[0].id}}/channels"
+            }
+          },
+          {
+            "Name": "Content",
+            "Value": {
+              "Text": "{\n  \"displayName\": \"{{step0.Body.aliasName}} - {{step0.Body.supplierId}}\",\n  \"description\": \"{{step0.Body.supplierName}}\",\n  \"membershipType\": \"standard\"\n}"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "IsParked": false,
+  "Status": "Active",
+  "Configuration": {
+    "IsSensitive": false
+  },
+  "LastChangedBy": "382e2e64-c29a-4af0-a758-960a512ec81f\\BxxuFaJL7FDQs6qpdjdP9sgswQqjVzXMGzQMP8wPdvM",
+  "LastChangedAt": "2022-01-24T16:04:30Z",
+  "LastAvailableHistoryAt": "0001-01-01T00:00:00Z",
+  "FeatureFlags": [
+    {
+      "Name": "templatingV2",
+      "IsEnabled": true
+    }
+  ]
+}
