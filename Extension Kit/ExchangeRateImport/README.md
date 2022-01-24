@@ -1,4 +1,4 @@
-# xchange Rate Import (ERPx)
+# Exchange Rate Import (ERPx)
 
 This flow is designed to Import exchange rates into ERPx, it can be scheduled to run once a day and requires a minimal amount of configuration beyond adding appropriate endpoint URLs and authorisation details.
 
