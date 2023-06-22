@@ -10,7 +10,7 @@
 	xmlns:local="http://localhost/base64.xsl"
 	xmlns:b64="https://github.com/ilyakharlamov/xslt_base64" 
 	xmlns:test="http://localhost/test">
-	<xsl:variable name="binarydatamap" select="document('base64_binarydatamap.xml')"/>
+	<xsl:variable name="binarydatamap" select="document('https://raw.githubusercontent.com/Tech4Consulting/T4C-Toolkit/main/XML/binarydatamap.xml')"/>
 	<xsl:key name="binaryToBase64" match="item" use="binary" />
 	<xsl:key name="asciiToBinary" match="item" use="ascii" />
 
